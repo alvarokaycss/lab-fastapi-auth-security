@@ -7,7 +7,7 @@ from sqlalchemy.orm import declarative_base
 class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     DB_URL: str  # Arquivo .env
-    DDBaseModel: ClassVar = declarative_base()
+    DBBaseModel: ClassVar = declarative_base()
     HOST: str = "127.0.0.1"
     PORT: int  # Arquivo .env
     RELOAD: bool = True
