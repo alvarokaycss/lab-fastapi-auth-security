@@ -32,7 +32,7 @@ async def get_artigos(
 async def get_artigo(id_artigo: int, db: AsyncSession = Depends(get_session)):
     query = select(ArtigoModel).where(ArtigoModel.id_artigo == id_artigo)
     result = await db.execute(query)
-    artigo = result.scalars().one_or_none()
+    artigo = result.scalars().unique().one_or_none()
 
     if not artigo:
         raise HTTPException(
@@ -75,7 +75,7 @@ async def put_artigo(
 ):
     query = select(ArtigoModel).where(ArtigoModel.id_artigo == id_artigo)
     result = await db.execute(query)
-    artigo_atual = result.scalars().one_or_none()
+    artigo_atual = result.scalars().unique().one_or_none()
 
     if not artigo_atual:
         raise HTTPException(
@@ -113,7 +113,7 @@ async def delete_artigo(
 ):
     query = select(ArtigoModel).where(ArtigoModel.id_artigo == id_artigo)
     result = await db.execute(query)
-    artigo_atual = result.scalars().one_or_none()
+    artigo_atual = result.scalars().unique().one_or_none()
 
     if not artigo_atual:
         raise HTTPException(

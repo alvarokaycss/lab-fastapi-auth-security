@@ -105,7 +105,7 @@ async def put_usuario(
 ):
     query = select(UsuarioModel).where(UsuarioModel.id_usuario == id_usuario)
     result = await db.execute(query)
-    usuario_atual: UsuarioModel = result.scalars().one_or_none()
+    usuario_atual: UsuarioModel = result.scalars().unique().one_or_none()
 
     if not usuario_atual:
         raise HTTPException(
@@ -137,7 +137,7 @@ async def put_usuario(
 async def delete_usuario(id_usuario: int, db: AsyncSession = Depends(get_session)):
     query = select(UsuarioModel).where(UsuarioModel.id_usuario == id_usuario)
     result = await db.execute(query)
-    usuario: UsuarioModel = result.scalars().one_or_none()
+    usuario: UsuarioModel = result.scalars().unique().one_or_none()
     if not usuario:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Usuário não encontrado"
