@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     HOST: str = "127.0.0.1"
     PORT: int  # Arquivo .env
     RELOAD: bool = True
-    LOG_LEVEL: str = "INFO"
+    LOG_LEVEL: str = "info"
 
     JWT_SECRET: str  # Arquivo .env
     """

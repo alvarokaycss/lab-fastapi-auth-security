@@ -3,11 +3,13 @@ from passlib.context import CryptContext
 # Cria uma instância de CryptContext para gerenciar o hash de senhas
 CRIPTO = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+
 def hash_password(password: str) -> str:
     """
     Codifica uma senha utilizando bcrypt e retorna o hash
     """
     return CRIPTO.hash(password)
+
 
 def verify_password(password: str, hashed_password: str) -> bool:
     """
