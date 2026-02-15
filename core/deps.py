@@ -48,7 +48,9 @@ async def get_current_user(
     except JWTError:
         raise credentials_exception
 
-    query = select(UsuarioModel).filter(UsuarioModel.id == int(token_data.username))
+    query = select(UsuarioModel).filter(
+        UsuarioModel.id_usuario == int(token_data.username)
+    )
     result = await db.execute(query)
     usuario: UsuarioModel = result.scalar_one_or_none()
 
